@@ -4,7 +4,6 @@ const webpack = require("webpack");
 const { VueLoaderPlugin } = require("vue-loader");
 const TerserPlugin = require("terser-webpack-plugin");
 module.exports = {
-  mode: "production",
   entry: {
     index: "./src/main.js",
   },
@@ -28,11 +27,6 @@ module.exports = {
       stream: false,
     },
   },
-  output: {
-    filename: "[name].js",
-    publicPath: "/scripts/",
-    path: path.resolve(__dirname, "../public/scripts"),
-  },
   optimization: {
     minimizer: [
       new TerserPlugin({
@@ -43,6 +37,9 @@ module.exports = {
         },
       }),
     ],
+  },
+  devServer: {
+    allowedHosts: "all",
   },
   plugins: [new VueLoaderPlugin()],
 };
